@@ -29,6 +29,18 @@ class Factory
     }
 
     /**
+     * Get a new instance of Persistence\Pano
+     *
+     * @return Persistence\Pano
+     */
+    public function createPersistence()
+    {
+        return new Persistence\Pano(
+            new Database($this->_createPdo($this->_config['database']))
+        );
+    }
+
+    /**
      * Get a new instance of Pano
      *
      * @return Pano

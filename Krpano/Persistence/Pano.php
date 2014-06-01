@@ -94,6 +94,26 @@ class Pano
     }
 
     /**
+     * LoadGallery by $galleryId
+     *
+     * @return array $result
+     */
+    public function loadGallery($galleryId)
+    {
+        $sql = 'SELECT a.* FROM panoramen a WHERE '
+        . 'a.show_on_pano_gallery=? '
+        .'AND tabgroup!=? '
+        . 'ORDER BY a.timestamp DESC';
+
+        $this->_sql->prepare($sql);
+        $this->_sql->bindValue(1, $galleryId, \PDO::PARAM_INT);
+        $this->_sql->bindValue(2, '', \PDO::PARAM_STR);
+        $this->_sql->execute();
+
+        return $this->_sql->fetchAssoc();
+    }
+
+    /**
      * by $name
      *
      * @param string $name
